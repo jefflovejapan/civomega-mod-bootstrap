@@ -12,9 +12,8 @@ from django.template import loader, Context
 from random import Random
 from collections import defaultdict
 import requests
+import locale
 import re
-import pdb
-import os
 
 PATTERN_ARGS_RE = re.compile(r'{([A-Za-z0-9_]+)}')
 
@@ -24,6 +23,7 @@ NONPROFITS_ROOT_URL = "https://projects.propublica.org/nonprofits/api/v1/search.
 # Pattern-dependent behavior
 
 def get_theme(theme):
+    locale.setlocale(locale.LC_ALL, '')
     payload = { 'q': theme}
     r = requests.get(NONPROFITS_ROOT_URL, params = payload)
     maybe_ok = r.ok
@@ -38,8 +38,8 @@ def get_theme(theme):
                 charity_info.append({'charity_name': charity['name'],
                                 'guidestar_url': charity['guidestar_url'],
                                 'nccs_url': charity['nccs_url'],
-                                'revenue': charity['revenue_amount'] if charity['revenue_amount'] else 0,
-                                'assets': charity['asset_amount'] if charity['asset_amount'] else 0})
+                                'revenue': locale.currency(charity['revenue_amount'] if charity['revenue_amount'] else 0),
+                                'assets': locale.currency(charity['asset_amount'] if charity['asset_amount'] else 0)})
 
 
     return {'maybe_ok': maybe_ok, 'results': charity_info, 'count': len(charity_info)}
