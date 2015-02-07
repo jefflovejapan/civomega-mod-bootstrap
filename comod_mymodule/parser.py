@@ -27,9 +27,18 @@ def answer_pattern(pattern, args):
     if len(args) != 1:
       return None
 
+    args_keys = PATTERN_ARGS_RE.findall(pattern_str)
+    kwargs = dict(zip(args_keys,args))
+    maybe_cheese = kwargs['cheese']
+
+    is_cheese = 'cheese' in maybe_cheese.lower()
     return {
-      'plaintxt': ''
-    }
+      'is_cheese': is_cheese,
+      'maybe_cheese': maybe_cheese,
+      'plaintxt': '%s is%s a cheese' % (
+          maybe_cheese,
+          " not" if is_cheese else ""
+      )
 
 ############################################################
 # Applicable module-wide

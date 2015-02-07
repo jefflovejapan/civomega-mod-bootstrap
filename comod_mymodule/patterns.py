@@ -14,5 +14,5 @@ PATTERNS = frozenset([
 
 """
 
-PATTERNS = frozenset([
+PATTERNS = frozenset(["is {thing} a kind of cheese?"
 ])
