@@ -1,0 +1,30 @@
+    {% if results|length == 0 %}
+    <p>We couldn't find any nonprofits.</p>
+    {% else %}
+    <p>{{ count }} results total. Here are the first {{ results|length }}:</p>
+
+    <table class="tablesorter">
+    	<thead>
+    		<tr>
+    			<th style="width: 120px;">Nonprofit</th>
+    			<th style="width: 100px;">Revenue</th>
+    			<th style="width: 100px;">Assets</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		{% for item in results %}
+    		<tr>
+    			<td> <a href="{{ item.guidestar_url }}">
+    				{{ item.charity_name }}
+    			</a></td>
+    			<td>{{ item.revenue }}</td>
+    			<td>{{ item.assets }}</td>
+    		</tr>
+    		{% endfor %}
+    	</tbody>
+    </table>
+    <script type="text/javascript">
+    	$(".tablesorter").tablesorter();
+    </script>
+    <p><em>Data provided by <a href="https://projects.propublica.org/nonprofits/api/">Pro Publica Inc.</a></em>…</p>
+    {% endif %}

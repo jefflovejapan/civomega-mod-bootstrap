@@ -14,5 +14,4 @@ PATTERNS = frozenset([
 
 """
 
-PATTERNS = frozenset(["is {thing} a kind of cheese?"
-])
+PATTERNS = frozenset(["Which nonprofits are related to {theme}?", "Which charities are related to {theme}?"])
