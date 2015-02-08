@@ -9,8 +9,6 @@ from .patterns import PATTERNS
 
 import json
 from django.template import loader, Context
-from random import Random
-from collections import defaultdict
 import requests
 import locale
 import re
